@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -21,7 +22,31 @@ class Program
         {
             Console.WriteLine($"{item.Word} : {item.Count}");
         }
+
+
+        List<Emloyee> employees = new List<Emloyee>
+        {
+            new Emloyee { EmployeeName="Mohana", salary = 3000 },
+            new Emloyee { EmployeeName="Ramesh", salary = 9000 },
+            new Emloyee { EmployeeName="Lukesh", salary = 10000 },
+            new Emloyee { EmployeeName="Paul", salary = 7000 },
+            new Emloyee { EmployeeName="Harry", salary = 1500 }
+        };    
+     
+
+        var listOfEmployeesEarnindAboveAverageSalary = FindListOfEmployeesEarnindAboveAverageSalary(employees);
+        Console.WriteLine("listEmployeesabove average salary: "+ string.Join(", ", listOfEmployeesEarnindAboveAverageSalary));
     }
+
+    static List<string> FindListOfEmployeesEarnindAboveAverageSalary(List<Emloyee> employees)
+    {
+        double aveSalary = employees.Average(e => e.salary);
+        Console.WriteLine("Average Salary", aveSalary);
+        var aboveAverageEmplyees =  employees.Where(e => e.salary > aveSalary).Select(e => e.EmployeeName).ToList();
+        return aboveAverageEmplyees;
+
+    }
+
 
     static int FindMostRecentNumbers(List<int> numbers)
     {
@@ -44,4 +69,10 @@ class Program
     }
 
 
+}
+
+class Emloyee
+{
+    public string EmployeeName { get; set; }
+    public int salary { get; set; }
 }
